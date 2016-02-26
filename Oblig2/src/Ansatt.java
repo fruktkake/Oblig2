@@ -1,7 +1,7 @@
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Ansatt extends Kort {
+public class Ansatt extends Kort implements Konstanter {
 
 	private final double kreditt = 0.05;
 	private final int bonus = 3;
@@ -46,8 +46,8 @@ public class Ansatt extends Kort {
 	@Override
 	public String getEtternavn() {
 		String etternavn = "";
-		for (int i = 0; i < super.getNavn().length(); i++){
-			etternavn += super.getNavn()charAt(i);
+		for (int i = 0; i < super.getNavn().length(); i++) {
+			etternavn += super.getNavn().charAt(i);
 			if (super.getNavn().charAt(i) == ' ')
 				etternavn = "";
 		}
@@ -76,12 +76,12 @@ public class Ansatt extends Kort {
 
 	@Override
 	public double beregnKreditt() {
-		return KREDITT * timelønn;
+		return kreditt * timelønn;
 	}
 
 	@Override
 	public double beregnBonus() {
-		return BONUS * ansiennitet;
+		return bonus * ansiennitet;
 	}
 
 	@Override
