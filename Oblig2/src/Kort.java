@@ -1,31 +1,30 @@
 
-public abstract class Kort {
-	private String fornavn, etternavn;
+public abstract class Kort implements Comparable<Kort>, Cloneable {
+
+	private String navn;
 	private int pin;
 	private int kortnummer;
 	private static int numOfCards = 1000;
 	private boolean sperretKort;
 	
-	public Kort(String fornavn, String etternavn, int pin, int kortnummer, int aksesskode){
-		this.fornavn = fornavn;
-		this.etternavn = etternavn;
+	protected Kort(){
+	}
+	
+	protected Kort(String navn, int pin){
+		this.navn = navn;
 		this.pin = pin;
 		this.kortnummer = ++numOfCards;
 		sperretKort = false;
 	}
 	
 	public String getNavn(){
-	return fornavn + etternavn;
+	return navn;
 	}
 	
-	public void setFornavn(String fornavn) {
-		this.fornavn = fornavn;
+	public void setNavn(String navn){
+		this.navn = navn;
 	}
-
-	public void setEtternavn(String etternavn) {
-		this.etternavn = etternavn;
-	}
-
+	
 	public void setPin(int pin) {
 		this.pin = pin;
 	}
@@ -44,8 +43,26 @@ public abstract class Kort {
 
 	@Override
 	public String toString() {
-		return "Kort [fornavn=" + fornavn + ", etternavn=" + etternavn + "]";
+		return "Kortinnehaver: " + getEtternavn() + ", " + getFornavn() + "\tKortnummer: " + kortnummer + "\tPIN: "
+				+ pin + "\tKort sperret: " + isSperret();
 	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+	
+	public abstract boolean checkPin(int pin);
+	
+	public abstract boolean pinRequired();
+	
+	public abstract String getFornavn();
+	
+	public abstract String getEtternavn();
+	
+	public abstract void setFornavn(String fornavn);
+
+	public abstract void setEtternavn(String etternavn);
 	
 	
 }
